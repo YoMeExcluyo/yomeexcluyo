@@ -6,14 +6,15 @@
 <title>YoMeExcluyo - Autoexclusión de Casas de Apuestas</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
 
 body{
-    font-family: Arial, sans-serif;
     background:#121212;
     color:white;
+    font-family:Arial,sans-serif;
     max-width:800px;
     margin:auto;
     padding:20px;
@@ -37,18 +38,30 @@ h1{
     margin-bottom:20px;
 }
 
-input[type="text"],
-input[type="email"]{
+input[type=text],
+input[type=email]{
     width:100%;
     padding:14px;
     border:none;
     border-radius:10px;
-    margin-top:10px;
     margin-bottom:15px;
 }
 
-.checkbox{
-    margin:12px 0;
+#buscar{
+    background:#2b2b2b;
+    color:white;
+}
+
+.lista{
+    max-height:250px;
+    overflow-y:auto;
+    background:#2a2a2a;
+    border-radius:10px;
+    padding:15px;
+}
+
+.item{
+    margin-bottom:12px;
 }
 
 button{
@@ -57,13 +70,13 @@ button{
     color:white;
     border:none;
     padding:16px;
-    font-size:18px;
     border-radius:10px;
+    font-size:18px;
     cursor:pointer;
 }
 
 button:hover{
-    background:#00b75c;
+    background:#00b85d;
 }
 
 .footer{
@@ -71,6 +84,7 @@ button:hover{
     color:#999;
     margin-top:30px;
 }
+
 </style>
 </head>
 <body>
@@ -87,43 +101,48 @@ Un minuto para autoexcluirte. Una decisión para recuperar el control.
 
 <input type="text" id="nombre" placeholder="Nombre completo">
 
-<input type="email" id="correo" placeholder="Correo registrado en las casas de apuestas">
+<input type="email" id="correo" placeholder="Correo registrado en las plataformas">
 
-<h3>Selecciona las plataformas</h3>
+<h3>Buscar plataforma</h3>
 
-<div class="checkbox">
-<label>
-<input type="checkbox" value="Betano">
-Betano
-</label>
+<input type="text" id="buscar" placeholder="Buscar..." onkeyup="filtrarPlataformas()">
+
+<br><br>
+
+<div class="lista" id="listaPlataformas">
+
+<div class="item">
+<label><input type="checkbox" value="Betano"> Betano</label>
 </div>
 
-<div class="checkbox">
-<label>
-<input type="checkbox" value="Bet365">
-Bet365
-</label>
+<div class="item">
+<label><input type="checkbox" value="Bet365"> Bet365</label>
 </div>
 
-<div class="checkbox">
-<label>
-<input type="checkbox" value="Coolbet">
-Coolbet
-</label>
+<div class="item">
+<label><input type="checkbox" value="Coolbet"> Coolbet</label>
 </div>
 
-<div class="checkbox">
-<label>
-<input type="checkbox" value="1xBet">
-1xBet
-</label>
+<div class="item">
+<label><input type="checkbox" value="1xBet"> 1xBet</label>
 </div>
 
-<div class="checkbox">
-<label>
-<input type="checkbox" value="Stake">
-Stake
-</label>
+<div class="item">
+<label><input type="checkbox" value="Stake"> Stake</label>
+</div>
+
+<div class="item">
+<label><input type="checkbox" value="Betsson"> Betsson</label>
+</div>
+
+<div class="item">
+<label><input type="checkbox" value="Rivalo"> Rivalo</label>
+</div>
+
+<div class="item">
+<label><input type="checkbox" value="Juega en Línea"> Juega en Línea</label>
+</div>
+
 </div>
 
 <br>
@@ -139,9 +158,9 @@ Autoexcluirme
 <h2>Recursos de ayuda</h2>
 
 <p>✅ Elimina las aplicaciones de apuestas.</p>
-<p>✅ Instala BetBlocker o Gamban.</p>
-<p>✅ Bloquea tarjetas que utilices para apostar.</p>
-<p>✅ Habla con una persona de confianza.</p>
+<p>✅ Instala BetBlocker.</p>
+<p>✅ Bloquea tus tarjetas.</p>
+<p>✅ Busca apoyo de familiares o profesionales.</p>
 
 </div>
 
@@ -151,23 +170,50 @@ YoMeExcluyo © 2026
 
 <script>
 
-// AQUÍ CAMBIARÁS LOS CORREOS REALES
+// CAMBIA ESTOS CORREOS POR LOS REALES
+
 const correosPlataformas = {
 
-    "Betano": "betano@ejemplo.com",
-    "Bet365": "bet365@ejemplo.com",
-    "Coolbet": "email1@ejemplo.com",
-    "1xBet": "email2@ejemplo.com",
-    "Stake": "stake@ejemplo.com"
+    "Betano":"betano@ejemplo.com",
+    "Bet365":"bet365@ejemplo.com",
+    "Coolbet":"email1@ejemplo.com",
+    "1xBet":"email2@ejemplo.com",
+    "Stake":"stake@ejemplo.com",
+    "Betsson":"betsson@ejemplo.com",
+    "Rivalo":"rivalo@ejemplo.com",
+    "Juega en Línea":"juega@ejemplo.com"
 
 };
 
-function enviarSolicitud() {
+function filtrarPlataformas(){
 
-    let nombre = document.getElementById("nombre").value;
-    let correo = document.getElementById("correo").value;
+    let filtro =
+    document.getElementById("buscar").value.toLowerCase();
 
-    if(nombre === "" || correo === ""){
+    let items =
+    document.querySelectorAll(".item");
+
+    items.forEach(item=>{
+
+        let texto =
+        item.innerText.toLowerCase();
+
+        item.style.display =
+        texto.includes(filtro) ? "block" : "none";
+
+    });
+
+}
+
+function enviarSolicitud(){
+
+    let nombre =
+    document.getElementById("nombre").value;
+
+    let correo =
+    document.getElementById("correo").value;
+
+    if(nombre==="" || correo===""){
         alert("Completa todos los campos.");
         return;
     }
@@ -177,7 +223,7 @@ function enviarSolicitud() {
 
     document
     .querySelectorAll('input[type="checkbox"]:checked')
-    .forEach(item => {
+    .forEach(item=>{
 
         let plataforma = item.value;
 
@@ -189,12 +235,13 @@ function enviarSolicitud() {
 
     });
 
-    if(plataformasSeleccionadas.length === 0){
+    if(plataformasSeleccionadas.length===0){
         alert("Selecciona al menos una plataforma.");
         return;
     }
 
-    let asunto = "Solicitud de Autoexclusión Permanente";
+    let asunto =
+    "Solicitud de Autoexclusión Permanente";
 
     let mensaje = `Hola,
 
@@ -211,14 +258,13 @@ Solicito además:
 
 - El cierre definitivo de mi cuenta.
 - Dejar de recibir promociones.
-- Confirmación de la autoexclusión.
+- Confirmar la autoexclusión.
 
 Gracias.`;
 
-    let mailto =
-        `mailto:${destinatarios.join(";")}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
+    window.location.href =
+    `mailto:${destinatarios.join(";")}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
 
-    window.location.href = mailto;
 }
 
 </script>
