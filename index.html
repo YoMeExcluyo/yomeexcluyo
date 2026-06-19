@@ -3,68 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MeExcluyo.cl - Autoexclusión de Casas de Apuestas</title>
+<title>YoMeExcluyo - Autoexclusión de Casas de Apuestas</title>
 
 <style>
-    body{
-        font-family: Arial, sans-serif;
-        background:#121212;
-        color:white;
-        max-width:800px;
-        margin:auto;
-        padding:20px;
-    }
+*{
+    box-sizing:border-box;
+}
 
-    h1{
-        text-align:center;
-        color:#00d26a;
-    }
+body{
+    font-family: Arial, sans-serif;
+    background:#121212;
+    color:white;
+    max-width:800px;
+    margin:auto;
+    padding:20px;
+}
 
-    .card{
-        background:#1e1e1e;
-        padding:20px;
-        border-radius:15px;
-        margin-top:20px;
-    }
+h1{
+    text-align:center;
+    color:#00d26a;
+}
 
-    input{
-        width:100%;
-        padding:12px;
-        margin-top:10px;
-        border:none;
-        border-radius:8px;
-    }
+.subtitulo{
+    text-align:center;
+    color:#bdbdbd;
+    margin-bottom:30px;
+}
 
-    .checkbox{
-        margin:10px 0;
-    }
+.card{
+    background:#1f1f1f;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
 
-    button{
-        width:100%;
-        background:#00d26a;
-        color:white;
-        border:none;
-        padding:15px;
-        border-radius:10px;
-        font-size:18px;
-        cursor:pointer;
-        margin-top:20px;
-    }
+input[type="text"],
+input[type="email"]{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    margin-top:10px;
+    margin-bottom:15px;
+}
 
-    button:hover{
-        background:#00b85c;
-    }
+.checkbox{
+    margin:12px 0;
+}
 
-    .footer{
-        text-align:center;
-        margin-top:30px;
-        color:#999;
-    }
+button{
+    width:100%;
+    background:#00d26a;
+    color:white;
+    border:none;
+    padding:16px;
+    font-size:18px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#00b75c;
+}
+
+.footer{
+    text-align:center;
+    color:#999;
+    margin-top:30px;
+}
 </style>
 </head>
 <body>
 
-<h1>🎯 MeExcluyo.cl</h1>
+<h1>🎯 YoMeExcluyo</h1>
+
+<p class="subtitulo">
+Un minuto para autoexcluirte. Una decisión para recuperar el control.
+</p>
 
 <div class="card">
 
@@ -74,27 +89,44 @@
 
 <input type="email" id="correo" placeholder="Correo registrado en las casas de apuestas">
 
-<h3>Selecciona las plataformas:</h3>
+<h3>Selecciona las plataformas</h3>
 
 <div class="checkbox">
-<input type="checkbox" value="Betano"> Betano
+<label>
+<input type="checkbox" value="Betano">
+Betano
+</label>
 </div>
 
 <div class="checkbox">
-<input type="checkbox" value="Bet365"> Bet365
+<label>
+<input type="checkbox" value="Bet365">
+Bet365
+</label>
 </div>
 
 <div class="checkbox">
-<input type="checkbox" value="Coolbet"> Coolbet
+<label>
+<input type="checkbox" value="Coolbet">
+Coolbet
+</label>
 </div>
 
 <div class="checkbox">
-<input type="checkbox" value="1xBet"> 1xBet
+<label>
+<input type="checkbox" value="1xBet">
+1xBet
+</label>
 </div>
 
 <div class="checkbox">
-<input type="checkbox" value="Stake"> Stake
+<label>
+<input type="checkbox" value="Stake">
+Stake
+</label>
 </div>
+
+<br>
 
 <button onclick="enviarSolicitud()">
 Autoexcluirme
@@ -103,36 +135,68 @@ Autoexcluirme
 </div>
 
 <div class="card">
+
 <h2>Recursos de ayuda</h2>
 
 <p>✅ Elimina las aplicaciones de apuestas.</p>
-<p>✅ Bloquea las páginas con BetBlocker.</p>
-<p>✅ Pide ayuda a familiares y amigos.</p>
-<p>✅ Busca apoyo psicológico si lo necesitas.</p>
+<p>✅ Instala BetBlocker o Gamban.</p>
+<p>✅ Bloquea tarjetas que utilices para apostar.</p>
+<p>✅ Habla con una persona de confianza.</p>
+
 </div>
 
 <div class="footer">
-MeExcluyo.cl © 2026
+YoMeExcluyo © 2026
 </div>
 
 <script>
 
-function enviarSolicitud(){
+// AQUÍ CAMBIARÁS LOS CORREOS REALES
+const correosPlataformas = {
+
+    "Betano": "betano@ejemplo.com",
+    "Bet365": "bet365@ejemplo.com",
+    "Coolbet": "email1@ejemplo.com",
+    "1xBet": "email2@ejemplo.com",
+    "Stake": "stake@ejemplo.com"
+
+};
+
+function enviarSolicitud() {
 
     let nombre = document.getElementById("nombre").value;
     let correo = document.getElementById("correo").value;
 
-    let seleccionadas = [];
+    if(nombre === "" || correo === ""){
+        alert("Completa todos los campos.");
+        return;
+    }
 
-    document.querySelectorAll('input[type="checkbox"]:checked')
+    let plataformasSeleccionadas = [];
+    let destinatarios = [];
+
+    document
+    .querySelectorAll('input[type="checkbox"]:checked')
     .forEach(item => {
-        seleccionadas.push(item.value);
+
+        let plataforma = item.value;
+
+        plataformasSeleccionadas.push(plataforma);
+
+        if(correosPlataformas[plataforma]){
+            destinatarios.push(correosPlataformas[plataforma]);
+        }
+
     });
+
+    if(plataformasSeleccionadas.length === 0){
+        alert("Selecciona al menos una plataforma.");
+        return;
+    }
 
     let asunto = "Solicitud de Autoexclusión Permanente";
 
-    let mensaje =
-`Hola,
+    let mensaje = `Hola,
 
 Mi nombre es ${nombre}.
 
@@ -141,14 +205,20 @@ Solicito la autoexclusión permanente de todas mis cuentas asociadas al correo:
 ${correo}
 
 Plataformas seleccionadas:
-${seleccionadas.join(", ")}
+${plataformasSeleccionadas.join(", ")}
 
-Solicito además dejar de recibir promociones y confirmar el cierre de mi cuenta.
+Solicito además:
+
+- El cierre definitivo de mi cuenta.
+- Dejar de recibir promociones.
+- Confirmación de la autoexclusión.
 
 Gracias.`;
 
-    window.location.href =
-    `mailto:?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
+    let mailto =
+        `mailto:${destinatarios.join(";")}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
+
+    window.location.href = mailto;
 }
 
 </script>
